@@ -1,0 +1,13 @@
+{
+  "name": "SayChieves",
+  "author": "bbroadhead",
+  "flags": [],
+  "publish": {
+    "tags": [
+      "achievements",
+      "library"
+    ],
+    "description": "Achievement progress for Steam Deck games.",
+    "image": ""
+  }
+}
