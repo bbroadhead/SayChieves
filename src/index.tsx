@@ -1,3 +1,4 @@
+import { startOverlays } from './overlay';
 import React, { useState } from 'react';
 import { definePlugin } from '@decky/api';
 import { PanelSection, PanelSectionRow } from '@decky/ui';
@@ -55,4 +56,4 @@ function SettingsPanel() {
     <PanelSectionRow><button onClick={()=>change(defaults)}>Restore default positions</button></PanelSectionRow>
   </PanelSection>;
 }
-export default definePlugin(() => ({name:'SayChieves',title:<div>SayChieves</div>,content:<SettingsPanel/>,icon:<span>🏆</span>}));
+export default definePlugin(() => { const stop=startOverlays(); return {name:'SayChieves',title:<div>SayChieves</div>,content:<SettingsPanel/>,icon:<span>🏆</span>,onDismount:stop}; });
