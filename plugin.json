@@ -9,5 +9,6 @@
     ],
     "description": "Achievement progress for Steam Deck games.",
     "image": ""
-  }
+  },
+  "api_version": 1
 }
