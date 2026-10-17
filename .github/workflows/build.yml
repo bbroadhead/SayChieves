@@ -27,6 +27,7 @@ jobs:
       - name: Package Decky plugin
         run: |
           test -s dist/index.js
+          node -e "const p=require('./plugin.json'); if(p.api_version!==1 || !p.name || !p.author) process.exit(1)"
           mkdir -p staging/SayChieves
           cp plugin.json package.json staging/SayChieves/
           cp -r dist staging/SayChieves/
