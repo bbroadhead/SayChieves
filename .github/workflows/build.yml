@@ -1,0 +1,41 @@
+name: Build SayChieves
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - name: Install dependencies
+        run: npm ci
+      - name: Build frontend
+        run: npm run build
+      - name: Package Decky plugin
+        run: |
+          test -s dist/index.js
+          mkdir -p staging/SayChieves
+          cp plugin.json package.json staging/SayChieves/
+          cp -r dist staging/SayChieves/
+          cd staging
+          zip -r ../SayChieves.zip SayChieves
+      - name: Upload test artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SayChieves
+          path: SayChieves.zip
+      - name: Publish tagged release
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "${GITHUB_REF_NAME}" SayChieves.zip --title "SayChieves ${GITHUB_REF_NAME}" --generate-notes --prerelease
