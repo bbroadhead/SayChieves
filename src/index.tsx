@@ -45,7 +45,7 @@ function Preview({position,variant,showUpNext=false}:{position:Position;variant:
 }
 function SettingsPanel() {
   const [settings,setSettings] = useState<Settings>(load);
-  const change = (update:Partial<Settings>) => setSettings(old => {const next={...old,...update};localStorage.setItem(key,JSON.stringify(next));return next;});
+  const change = (update:Partial<Settings>) => setSettings(old => {const next={...old,...update};localStorage.setItem(key,JSON.stringify(next));window.dispatchEvent(new Event('saychieves-settings'));return next;});
   return <PanelSection title="SayChieves badge settings">
     <PanelSectionRow>Game-page badge: trophy, earned/total, and completion bar. Capsule badge: compact rounded pill inspired by Steam library status badges. These settings and previews are implemented; live game-page/capsule injection and Steam achievement retrieval still require integration.</PanelSectionRow>
     <PanelSectionRow><label><input type="checkbox" checked={settings.showPage} onChange={e=>change({showPage:e.target.checked})}/> Show game-page badge</label></PanelSectionRow>
