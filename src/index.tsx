@@ -17,7 +17,7 @@ function Trophy({size=16}:{size?:number}) {
 function Badge({earned,total,variant}:{earned:number;total:number;variant:'page'|'capsule'}) {
   const pct=total>0?Math.max(0,Math.min(100,earned/total*100)):0;
   if(variant==='capsule') return <span style={{display:'inline-flex',alignItems:'center',justifyContent:'center',gap:4,padding:'5px 8px',minHeight:28,borderRadius:999,background:'#192733',border:'1px solid #638095',boxShadow:'0 2px 8px #0008',color:'#fff',fontWeight:700,fontSize:12,whiteSpace:'nowrap'}} aria-label={`${earned} of ${total} achievements`}><Trophy size={14}/>{earned}/{total}</span>;
-  return <div style={{width:145,padding:'7px 10px',borderRadius:9,background:'rgba(12,17,25,.92)',border:'1px solid #526779',color:'#fff',boxShadow:'0 2px 8px #0007'}}>
+  return <div style={{width:145,padding:'7px 10px',borderRadius:999,background:'#192733',border:'1px solid #638095',color:'#fff',boxShadow:'0 2px 8px #0008'}}>
     <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:6,fontSize:14,fontWeight:700}}><Trophy/>{earned}/{total}</div>
     <div role="progressbar" aria-label="Achievement completion" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(pct)} style={{height:5,background:'#41505b',borderRadius:99,overflow:'hidden',marginTop:6}}><div style={{height:'100%',width:`${pct}%`,background:'#e9c35b',borderRadius:99}}/></div>
   </div>;
